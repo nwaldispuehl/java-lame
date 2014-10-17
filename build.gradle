@@ -8,6 +8,8 @@ targetCompatibility=1.7
 task sourcesJar(type: Jar, dependsOn: classes) {
   classifier = 'sources'
   from sourceSets.main.allSource
+  from "LICENSE"
+  from "README.md"
 }
 
 jar {
@@ -17,9 +19,4 @@ jar {
   manifest {
     attributes 'Main-Class': 'net.sourceforge.lame.mp3.Main'
   }
-}
-
-sourcesJar {
-  from "LICENSE"
-  from "README.md"
 }

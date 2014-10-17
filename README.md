@@ -1,9 +1,8 @@
-This java port of LAME 3.98.4 was created by Ken Händel
-for his 'jump3r - Java Unofficial MP3 EncodeR' project:
+# Java LAME
+This java port of LAME 3.98.4 was created by Ken Händel for his 'jump3r - Java Unofficial MP3 EncodeR' project:
 http://sourceforge.net/projects/jsidplay2/
 
-Original sources by the authors of LAME:
-http://www.sourceforge.net/projects/lame
+Original sources by the authors of LAME: http://www.sourceforge.net/projects/lame
 
 The code is - as the original - licensed under the LGPL (see LICENSE).
 
