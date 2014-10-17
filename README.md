@@ -6,7 +6,7 @@ Original sources by the authors of LAME: http://www.sourceforge.net/projects/lam
 
 The code is - as the original - licensed under the LGPL (see LICENSE).
 
-# How to build 
+## How to build 
 
 To create a jar file, you may start the gradle build process with the included gradle wrapper:
 
@@ -16,14 +16,14 @@ The resulting library is then to be found in the following directory:
 
     ./build/libs/
 
-# How to run
+## How to run
 
 After having created a jar file, you certainly can run it as a command line application:
 
     $ cd /build/libs
     $ java -jar net.sourceforge.lame-3.98.4.jar
 
-# How to use Java LAME in a project?
+## How to use Java LAME in a project?
 
 To convert a PCM byte array to an MP3 byte array, you may use Ken Händels ```LameEncoder``` which offers the 
 following convenience method for converting chunks of pcm byte array:
