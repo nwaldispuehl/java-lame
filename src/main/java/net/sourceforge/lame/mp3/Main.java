@@ -879,7 +879,7 @@ public class Main {
   private void progressStep(int percent) {
     float consoleX = (float) percent * MAX_WIDTH / 100f;
     if ((int) consoleX != oldConsoleX && !lame.getParser().embedded)
-      System.out.println("step " + percent);
+      System.out.print(".");
     oldConsoleX = (int) consoleX;
     support.firePropertyChange("progress", oldPercent, percent);
   }
