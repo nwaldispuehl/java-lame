@@ -289,7 +289,8 @@ public class Main {
 
     if (lame.getParser().silent <= 0) {
       for (i = curPercent; i < 100; i++) {
-        progressStep();
+        progressStep(i);
+        curPercent++;
       }
       System.out.println();
     }
@@ -869,18 +870,18 @@ public class Main {
       percent = 100;
     }
     if (oldPercent != percent) {
-      progressStep();
+      progressStep(percent);
+      curPercent++;
     }
     oldPercent = percent;
   }
 
-  private void progressStep() {
-    curPercent++;
-    float consoleX = (float) curPercent * MAX_WIDTH / 100f;
+  private void progressStep(int percent) {
+    float consoleX = (float) percent * MAX_WIDTH / 100f;
     if ((int) consoleX != oldConsoleX && !lame.getParser().embedded)
-      System.out.print(".");
+      System.out.println("step " + percent);
     oldConsoleX = (int) consoleX;
-    support.firePropertyChange("progress", oldPercent, curPercent);
+    support.firePropertyChange("progress", oldPercent, percent);
   }
 
   /**
