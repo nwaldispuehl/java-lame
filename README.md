@@ -15,6 +15,8 @@ To create a jar file, you may start the gradle build process with the included g
 The resulting library is then to be found in the following directory:
 
     ./build/libs/
+    
+You can find an already built Jar file in the releases: https://github.com/nwaldispuehl/java-lame/releases
 
 ## How to run
 
