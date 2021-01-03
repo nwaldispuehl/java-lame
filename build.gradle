@@ -3,7 +3,7 @@ apply plugin:'java'
 version = '3.98.4'
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-  classifier = 'sources'
+  archiveClassifier.set("sources")
   from sourceSets.main.allSource
   from "LICENSE"
   from "README.md"
@@ -18,3 +18,15 @@ jar {
   }
 }
 
+test {
+  useJUnitPlatform()
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+}

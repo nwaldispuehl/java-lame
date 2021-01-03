@@ -25,6 +25,15 @@ After having created a jar file, you certainly can run it as a command line appl
     $ cd /build/libs
     $ java -jar net.sourceforge.lame-3.98.4.jar
 
+## How to run the test
+
+To see the creation of a MP3 file in action one can run the test class `LameEncoderTest.java`:
+
+    $ ./gradlew check
+    
+It takes the `src/test/resources/test.wav` file as input and writes the converted data into `build/test.mp3`.
+
+
 ## How to use Java LAME in a project?
 
 To convert a PCM byte array to an MP3 byte array, you may use Ken Händels ```LameEncoder``` which offers the 
@@ -34,26 +43,11 @@ following convenience method for converting chunks of pcm byte array:
 LameEncoder#encodeBuffer(final byte[] pcm, final int pcmOffset, final int pcmLength, final byte[] encoded)
 ```
 
-A sample of its use:
+A sample of its use can be found in the `LameEncoderTest.java`:
+https://github.com/nwaldispuehl/java-lame/blob/master/src/test/java/net/sourceforge/lame/lowlevel/LameEncoderTest.java
 
-```java
-public byte[] encodePcmToMp3(byte[] pcm) {
-  LameEncoder encoder = new LameEncoder(inputFormat, 256, MPEGMode.STEREO, Lame.QUALITY_HIGHEST, false);
+### Credits
 
-  ByteArrayOutputStream mp3 = new ByteArrayOutputStream();
-  byte[] buffer = new byte[encoder.getPCMBufferSize()];
+Test sound 'Jingle004' (CC BY-NC 3.0) by 'cydon': https://freesound.org/people/cydon/sounds/133054/
 
-  int bytesToTransfer = Math.min(buffer.length, pcm.length);
-  int bytesWritten;
-  int currentPcmPosition = 0;
-  while (0 < (bytesWritten = encoder.encodeBuffer(pcm, currentPcmPosition, bytesToTransfer, buffer))) {
-    currentPcmPosition += bytesToTransfer;
-    bytesToTransfer = Math.min(buffer.length, pcm.length - currentPcmPosition);
 
-    mp3.write(buffer, 0, bytesWritten);
-  }
-
-  encoder.close();
-  return mp3.toByteArray();
-}
-```
