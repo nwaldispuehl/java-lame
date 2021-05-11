@@ -36,8 +36,10 @@ It takes the `src/test/resources/test.wav` file as input and writes the converte
 
 ## How to use Java LAME in a project?
 
-To convert a PCM byte array to an MP3 byte array, you may use Ken Händels ```LameEncoder``` which offers the 
-following convenience method for converting chunks of pcm byte array:
+### WAV/PCM to MP3
+
+To convert a WAV/PCM byte array to an MP3 byte array, you may use Ken Händels ```LameEncoder``` which offers the 
+following convenience method for converting chunks of such byte buffer:
 
 ```
 LameEncoder#encodeBuffer(final byte[] pcm, final int pcmOffset, final int pcmLength, final byte[] encoded)
@@ -45,6 +47,18 @@ LameEncoder#encodeBuffer(final byte[] pcm, final int pcmOffset, final int pcmLen
 
 A sample of its use can be found in the `LameEncoderTest.java`:
 https://github.com/nwaldispuehl/java-lame/blob/master/src/test/java/net/sourceforge/lame/lowlevel/LameEncoderTest.java
+
+### MP3 to WAV/PCM
+
+Analog for decoding; the following method allows for easy conversion of a MP3 file into a PCM byte array:
+
+```
+LameDecoder#decode(final ByteBuffer sampleBuffer)
+```
+
+A sample of its use can be found in the `LameDecoderTest.java`:
+https://github.com/nwaldispuehl/java-lame/blob/master/src/test/java/net/sourceforge/lame/lowlevel/LameDecoderTest.java
+
 
 ### Credits
 

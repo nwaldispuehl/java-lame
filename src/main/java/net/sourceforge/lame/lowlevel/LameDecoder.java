@@ -106,4 +106,8 @@ public class LameDecoder {
   public final int getFrameSize() {
     return lame.getFlags().getFrameSize();
   }
+
+  public final int getBufferSize() {
+    return getChannels() * getFrameSize() * 2;
+  }
 }
