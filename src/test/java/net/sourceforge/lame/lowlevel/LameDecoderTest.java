@@ -27,9 +27,8 @@ public class LameDecoderTest extends AbstractLameTest {
   private final static String WAVE_MAGIC_NUMBER = "52 49 46 46";
   private static final int WAV_TRACK_LENGTH = 1101356;
 
-  private static final float SAMPLE_RATE = 44100.0F;
-  private static final AudioFormat.Encoding TARGET_ENCODING = AudioFormat.Encoding.PCM_SIGNED;
-  private static final AudioFormat TARGET_AUDIO_FORMAT = new AudioFormat(TARGET_ENCODING, SAMPLE_RATE, 16, 2, 4, SAMPLE_RATE, false);
+  private static final AudioFormat.Encoding WAV_TARGET_ENCODING = AudioFormat.Encoding.PCM_SIGNED;
+
 
 
   //---- Test methods
@@ -65,11 +64,19 @@ public class LameDecoderTest extends AbstractLameTest {
       pcm.write(buffer.array());
     }
 
-    AudioInputStream audioInputStream  = new AudioInputStream(new ByteArrayInputStream(pcm.toByteArray()), TARGET_AUDIO_FORMAT, (pcm.size() / TARGET_AUDIO_FORMAT.getFrameSize()));
+    return asWav(pcm.toByteArray(), decoder.getSampleRate(), decoder.getChannels());
+  }
+
+  /**
+   * Converts a PCM byte array into a WAVE byte array, that is, adds the appropriate headers.
+   * For this we first convert it into an {@link AudioInputStream}, and can then use this {@link AudioSystem}.
+   */
+  private byte[] asWav(byte[] pcmBytes, int sampleRate, int channels) throws IOException {
+    AudioFormat wavAudioFormat = new AudioFormat(WAV_TARGET_ENCODING, sampleRate, 16, channels, 4, AudioSystem.NOT_SPECIFIED, false);
+    AudioInputStream audioInputStream  = new AudioInputStream(new ByteArrayInputStream(pcmBytes), wavAudioFormat, (pcmBytes.length / wavAudioFormat.getFrameSize()));
 
     ByteArrayOutputStream wav = new ByteArrayOutputStream();
     AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, wav);
-
     return wav.toByteArray();
   }
 
