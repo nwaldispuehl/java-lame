@@ -8,7 +8,7 @@ The code is - as the original - licensed under the LGPL (see LICENSE).
 
 ## How to build 
 
-To create a jar file, you may start the gradle build process with the included gradle wrapper:
+To create a JAR file, you may start the gradle build process with the included gradle wrapper:
 
     $ ./gradlew jar
     
@@ -16,11 +16,35 @@ The resulting library is then to be found in the following directory:
 
     ./build/libs/
     
-You can find an already built Jar file in the releases: https://github.com/nwaldispuehl/java-lame/releases
+You can find an already built JAR file in the releases: https://github.com/nwaldispuehl/java-lame/releases
+
+## How to publish artifact to local Maven repository for the use in Maven projects
+
+To store the artifact in the local Maven repository (e.g. `~/.m2/repository/`) use this task:
+
+    $ ./gradlew publishToMavenLocal
+
+It is then present at the expected location, e.g.:
+
+    $ ls ~/.m2/repository/net/sourceforge/lame/lame/3.98.4    
+    lame-3.98.4.jar  lame-3.98.4.module  lame-3.98.4.pom
+
+and can be used in local Maven projects with this signature:
+
+    <dependency>
+        <groupId>net.sourceforge.lame</groupId>
+        <artifactId>lame</artifactId>
+        <version>3.98.4</version>
+    </dependency>
+
+## How to publish artifact to Maven Central
+
+If you intend to publish the artifact to Maven Central (https://search.maven.org/) please first adapt the `groupId` in the `build.gradle` file to your own domain / projectname.
+Consult https://docs.gradle.org/current/userguide/publishing_maven.html for how to publish to a Maven repository.
 
 ## How to run
 
-After having created a jar file, you certainly can run it as a command line application:
+After having created a JAR file, you certainly can run it as a command line application:
 
     $ cd /build/libs
     $ java -jar net.sourceforge.lame-3.98.4.jar

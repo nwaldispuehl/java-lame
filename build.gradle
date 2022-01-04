@@ -1,4 +1,7 @@
-apply plugin:'java'
+plugins {
+  id 'java'
+  id 'maven-publish'
+}
 
 version = '3.98.4'
 
@@ -15,6 +18,17 @@ jar {
 
   manifest {
     attributes 'Main-Class': 'net.sourceforge.lame.mp3.Main'
+  }
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      groupId = 'net.sourceforge.lame'
+      artifactId = 'lame'
+
+      from components.java
+    }
   }
 }
 
